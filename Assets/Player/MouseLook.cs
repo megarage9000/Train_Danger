@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Refer to: https://www.youtube.com/watch?v=tXDgSGOEatk&t
 public class MouseLook : MonoBehaviour
 {
-    [SerializeField] float sensitivityX = 8f;
-    [SerializeField] float sensitivityY = 0.5f;
+    [SerializeField] float sensitivityX = 4f;
+    [SerializeField] float sensitivityY = 4f;
 
     float mouseX, mouseY;
 

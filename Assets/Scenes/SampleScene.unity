@@ -429,6 +429,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1491126815}
   speed: 10
+  gravity: -30
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  jumpHeight: 3.5
 --- !u!114 &1491126813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +446,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c230856a7f6f14b844d745cd41f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivityX: 8
+  sensitivityY: 0.5
+  playerCamera: {fileID: 963194228}
+  xClamp: 85
 --- !u!114 &1491126814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 1491126812}
+  mouseLook: {fileID: 1491126813}
 --- !u!143 &1491126815
 CharacterController:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Refer to: https://www.youtube.com/watch?v=tXDgSGOEatk&t
 public class Movement : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
