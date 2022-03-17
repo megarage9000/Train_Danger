@@ -29,6 +29,7 @@ public class Interaction : MonoBehaviour
 
     public void OnPickup()
     {
+        // Pick up object
         if(pickupable && pickupable.GetComponent<Rigidbody>() && heldObject == null)
         {
             Rigidbody rb = pickupable.GetComponent<Rigidbody>();
@@ -37,6 +38,7 @@ public class Interaction : MonoBehaviour
             rb.transform.parent = heldObjectPosition;
             heldObject = pickupable;
         }
+        // Drop object
         else if(heldObject != null)
         {
             Rigidbody rb = heldObject.GetComponent<Rigidbody>();
@@ -78,10 +80,6 @@ public class Interaction : MonoBehaviour
         if(heldObject == null)
         {
             pickupable = GetObjectInRange(pickUpMask);
-            if(pickupable)
-            {
-                print("Pickupable in range!");
-            }
         }
         if(interactable == null)
         {
