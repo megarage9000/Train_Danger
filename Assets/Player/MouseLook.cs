@@ -14,6 +14,11 @@ public class MouseLook : MonoBehaviour
     [SerializeField] float xClamp = 85f;
     float xRotation = 0f;
 
+    public void Awake()
+    {
+        Cursor.visible = false;
+    }
+
     public void ReceiveInput(Vector2 mouseInput)
     {
         mouseX = mouseInput.x * sensitivityX;

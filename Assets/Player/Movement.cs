@@ -39,8 +39,12 @@ public class Movement : MonoBehaviour
             verticalVelocity.y = 0;
         }
 
-        Vector3 horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * speed;
-        controller.Move(horizontalVelocity * Time.deltaTime);
+        var vertSpeed = horizontalInput.y * speed * Time.deltaTime;
+        var horzSpeed = horizontalInput.x * speed * Time.deltaTime;
+
+        var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
+        movementSpeed = transform.TransformDirection(movementSpeed);
+        controller.Move(movementSpeed);
 
         // Jump first before gravity
         if (isJump)
