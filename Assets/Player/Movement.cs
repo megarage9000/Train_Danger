@@ -15,16 +15,15 @@ public class Movement : MonoBehaviour
     bool isGrounded;
 
     [SerializeField] float jumpHeight = 3.5f;
-    bool isJump;
+    bool isJump = false;
+
+    [SerializeField] float scaleDown = 0.5f;
+    [SerializeField] float crouchSpeedMultiplier = 0.5f;
+    public Transform head;
+    bool isCrouch = false;
     public void ReceiveInput(Vector2 _horizontalInput)
     {
         horizontalInput = _horizontalInput;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -40,7 +39,7 @@ public class Movement : MonoBehaviour
 
         var vertSpeed = horizontalInput.y * speed * Time.deltaTime;
         var horzSpeed = horizontalInput.x * speed * Time.deltaTime;
-
+        
         var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
         movementSpeed = transform.TransformDirection(movementSpeed);
         controller.Move(movementSpeed);
@@ -64,5 +63,29 @@ public class Movement : MonoBehaviour
     public void OnJumpedPressed()
     {
         isJump = true;
+    }
+
+    public void OnCrouchPressed()
+    {
+        if (isGrounded)
+        {
+            isCrouch = !isCrouch;
+            if(isCrouch)
+            {
+                Vector3 headPosition = head.position;
+                headPosition.y *= scaleDown;
+                head.position = headPosition;
+                speed *= crouchSpeedMultiplier;
+                print(speed);
+            }
+            else
+            {
+                Vector3 headPosition = head.position;
+                headPosition.y /= scaleDown;
+                head.position = headPosition;
+                speed /= crouchSpeedMultiplier;
+                print(speed);
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     PlayerControls controls;
     PlayerControls.GroundMovementActions groundMovement;
     PlayerControls.InteractionActions interaction;
+    PlayerControls.MiscActions misc;
     
     Vector2 horizontalInput;
     Vector2 mouseInput;
@@ -22,6 +23,8 @@ public class InputManager : MonoBehaviour
         controls = new PlayerControls();
         groundMovement = controls.GroundMovement;
         interaction = controls.Interaction;
+        misc = controls.Misc;
+
 
         // groundMovement.[action].performed += context => do something
         // Essentially reads a vector 2 input coming from the input system
@@ -36,6 +39,15 @@ public class InputManager : MonoBehaviour
 
         // Interaction components
         interaction.Pickup.performed += _ => playerInteraction.OnPickup();
+
+        // Crouch
+        groundMovement.Crouch.performed += _ => movement.OnCrouchPressed();
+
+        // Miscelleaneous (pause)
+        misc.Pause.performed += _ =>
+        {
+            mouseLook.ToggleCursor();
+        };
     }
 
     private void OnEnable()

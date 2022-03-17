@@ -14,9 +14,12 @@ public class MouseLook : MonoBehaviour
     [SerializeField] float xClamp = 85f;
     float xRotation = 0f;
 
+    bool toggleCursor = true;
+
     public void Awake()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void ReceiveInput(Vector2 mouseInput)
@@ -28,13 +31,31 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up, mouseX * Time.deltaTime);
+        if (toggleCursor)
+        {
+            transform.Rotate(Vector3.up, mouseX * Time.deltaTime);
 
-        // Rotating camera
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
-        Vector3 targetRotation = transform.eulerAngles;
-        targetRotation.x = xRotation;
-        playerCamera.eulerAngles = targetRotation;
+            // Rotating camera
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
+            Vector3 targetRotation = transform.eulerAngles;
+            targetRotation.x = xRotation;
+            playerCamera.eulerAngles = targetRotation;
+        }
+    }
+
+    public void ToggleCursor()
+    {
+        toggleCursor = !toggleCursor;
+        if(toggleCursor)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 }

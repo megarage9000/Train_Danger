@@ -233,6 +233,34 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Misc"",
+            ""id"": ""1e4f4b74-cae8-4bd2-9605-7e32ad2fc96f"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""28b56302-7b8f-4568-8c49-8b88cba4b367"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e8546891-39f8-4a8e-9769-86d920a07557"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -248,6 +276,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Pickup = m_Interaction.FindAction("Pickup", throwIfNotFound: true);
         m_Interaction_Activate = m_Interaction.FindAction("Activate", throwIfNotFound: true);
+        // Misc
+        m_Misc = asset.FindActionMap("Misc", throwIfNotFound: true);
+        m_Misc_Pause = m_Misc.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -409,6 +440,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public InteractionActions @Interaction => new InteractionActions(this);
+
+    // Misc
+    private readonly InputActionMap m_Misc;
+    private IMiscActions m_MiscActionsCallbackInterface;
+    private readonly InputAction m_Misc_Pause;
+    public struct MiscActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MiscActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_Misc_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_Misc; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MiscActions set) { return set.Get(); }
+        public void SetCallbacks(IMiscActions instance)
+        {
+            if (m_Wrapper.m_MiscActionsCallbackInterface != null)
+            {
+                @Pause.started -= m_Wrapper.m_MiscActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_MiscActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_MiscActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_MiscActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public MiscActions @Misc => new MiscActions(this);
     public interface IGroundMovementActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
@@ -421,5 +485,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnPickup(InputAction.CallbackContext context);
         void OnActivate(InputAction.CallbackContext context);
+    }
+    public interface IMiscActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

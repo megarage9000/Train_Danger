@@ -50,6 +50,7 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    // Scans for specific objects in range, with a given mask
     GameObject GetObjectInRange(LayerMask layerMask)
     {
         RaycastHit hit;
