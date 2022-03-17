@@ -8,9 +8,11 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] Movement movement;
     [SerializeField] MouseLook mouseLook;
+    [SerializeField] Interaction playerInteraction;
 
     PlayerControls controls;
     PlayerControls.GroundMovementActions groundMovement;
+    PlayerControls.InteractionActions interaction;
     
     Vector2 horizontalInput;
     Vector2 mouseInput;
@@ -19,6 +21,7 @@ public class InputManager : MonoBehaviour
     {
         controls = new PlayerControls();
         groundMovement = controls.GroundMovement;
+        interaction = controls.Interaction;
 
         // groundMovement.[action].performed += context => do something
         // Essentially reads a vector 2 input coming from the input system
@@ -27,9 +30,12 @@ public class InputManager : MonoBehaviour
         // Directly call jump instead of updating
         groundMovement.Jump.performed += _ => movement.OnJumpedPressed();
 
+        // Mouse movement
         groundMovement.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         groundMovement.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
 
+        // Interaction components
+        interaction.Pickup.performed += _ => playerInteraction.OnPickup();
     }
 
     private void OnEnable()
