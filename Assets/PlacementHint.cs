@@ -31,6 +31,12 @@ public class PlacementHint : MonoBehaviour
         return transform.rotation.eulerAngles;
     }
 
+    public void isObjectPlaced(bool value)
+    {
+        render.enabled = !value;
+        outline.enabled = !value;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         GameObject entered = other.gameObject;

@@ -49,6 +49,7 @@ public class Interaction : MonoBehaviour
     {
         if (heldObject)
         {
+            // Check if object is placeable
             PlaceableObject placeableObject = heldObject.GetComponent<PlaceableObject>();
             if(placeableObject && placeableObject.OnPlace())
             {

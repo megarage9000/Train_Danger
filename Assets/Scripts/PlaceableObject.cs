@@ -21,6 +21,8 @@ public class PlaceableObject : PickupableInterface
                 transform.SetPositionAndRotation(position, Quaternion.Euler(rotation));
                 rb.constraints = RigidbodyConstraints.FreezeAll;
                 rb.freezeRotation = true;
+                hint.isObjectPlaced(true);
+                OnLeave();
                 return true;
             }
             return false;
