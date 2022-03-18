@@ -50,13 +50,24 @@ public class Interaction : MonoBehaviour
         }
     }
 
+    public void OnInteract()
+    {
+        interactable.GetComponent<InteractableInterface>().Interact();
+    }
+
     // Scans for specific objects in range, with a given mask
     GameObject GetObjectInRange(LayerMask layerMask)
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionRange, layerMask))
         {
-            return hit.transform.gameObject;
+            GameObject detectObject = hit.collider.transform.gameObject;
+            InteractableInterface interactable = detectObject.GetComponent<InteractableInterface>();
+            if (interactable)
+            {
+                interactable.OnDetect();
+            }
+            return detectObject;
         }
         return null;
     }
@@ -82,10 +93,25 @@ public class Interaction : MonoBehaviour
         {
             pickupable = GetObjectInRange(pickUpMask);
         }
-        if(interactable == null)
-        {
-            interactable = GetObjectInRange(interactionMask);
-        }
+        CheckInteractables();
         MoveHeldObject();
+    }
+
+    void CheckInteractables()
+    {
+        GameObject scannedInteractable = GetObjectInRange(interactionMask);
+        if (scannedInteractable)
+        {
+            if(scannedInteractable != interactable && interactable != null)
+            {
+                interactable.GetComponent<InteractableInterface>().OnLeave();
+            }
+            scannedInteractable.GetComponent<InteractableInterface>().OnDetect();
+            interactable = scannedInteractable;
+        }
+        else if(interactable != null)
+        {
+            interactable.GetComponent<InteractableInterface>().OnLeave();
+        }
     }
 }

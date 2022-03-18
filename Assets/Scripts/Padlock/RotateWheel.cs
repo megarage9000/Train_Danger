@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateWheel : MonoBehaviour
+public class RotateWheel : InteractableInterface
 {
     bool isRotating;
     float rotation;
@@ -46,5 +46,13 @@ public class RotateWheel : MonoBehaviour
         number = (number > MAX_NUM) ? MIN_NUM : (number < MIN_NUM) ? MAX_NUM : number;
         isRotating = false;
         Rotated(wheelId, number);
+    }
+
+    public override void Interact()
+    {
+        if (!isRotating)
+        {
+            StartCoroutine(Rotate(true));
+        }
     }
 }
