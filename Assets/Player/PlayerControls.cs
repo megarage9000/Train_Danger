@@ -207,6 +207,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Freeze Object"",
+                    ""type"": ""Button"",
+                    ""id"": ""77d3399d-210d-4639-9d96-b422b0db8236"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -229,6 +238,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Activate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""372d6c32-bbad-443a-afac-0562291f9d74"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Freeze Object"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -276,6 +296,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_Pickup = m_Interaction.FindAction("Pickup", throwIfNotFound: true);
         m_Interaction_Activate = m_Interaction.FindAction("Activate", throwIfNotFound: true);
+        m_Interaction_FreezeObject = m_Interaction.FindAction("Freeze Object", throwIfNotFound: true);
         // Misc
         m_Misc = asset.FindActionMap("Misc", throwIfNotFound: true);
         m_Misc_Pause = m_Misc.FindAction("Pause", throwIfNotFound: true);
@@ -405,12 +426,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IInteractionActions m_InteractionActionsCallbackInterface;
     private readonly InputAction m_Interaction_Pickup;
     private readonly InputAction m_Interaction_Activate;
+    private readonly InputAction m_Interaction_FreezeObject;
     public struct InteractionActions
     {
         private @PlayerControls m_Wrapper;
         public InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pickup => m_Wrapper.m_Interaction_Pickup;
         public InputAction @Activate => m_Wrapper.m_Interaction_Activate;
+        public InputAction @FreezeObject => m_Wrapper.m_Interaction_FreezeObject;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -426,6 +449,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Activate.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnActivate;
                 @Activate.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnActivate;
                 @Activate.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnActivate;
+                @FreezeObject.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnFreezeObject;
+                @FreezeObject.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnFreezeObject;
+                @FreezeObject.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnFreezeObject;
             }
             m_Wrapper.m_InteractionActionsCallbackInterface = instance;
             if (instance != null)
@@ -436,6 +462,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Activate.started += instance.OnActivate;
                 @Activate.performed += instance.OnActivate;
                 @Activate.canceled += instance.OnActivate;
+                @FreezeObject.started += instance.OnFreezeObject;
+                @FreezeObject.performed += instance.OnFreezeObject;
+                @FreezeObject.canceled += instance.OnFreezeObject;
             }
         }
     }
@@ -485,6 +514,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnPickup(InputAction.CallbackContext context);
         void OnActivate(InputAction.CallbackContext context);
+        void OnFreezeObject(InputAction.CallbackContext context);
     }
     public interface IMiscActions
     {

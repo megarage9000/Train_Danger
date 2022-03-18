@@ -11,16 +11,9 @@ public abstract class InteractableInterface : MonoBehaviour
     void Start()
     {
         objectOutline = GetComponent<Outline>();
-        if(!objectOutline)
-        {
-            print("Can't find outline");
-        }
-        else
-        {
-            print("Found outline!");
-        }
         objectOutline.enabled = false;
         objectOutline.OutlineColor = Color.cyan;
+        objectOutline.OutlineWidth = 10f;
     }
     public void OnDetect()
     {

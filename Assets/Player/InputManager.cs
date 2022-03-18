@@ -40,6 +40,7 @@ public class InputManager : MonoBehaviour
         // Interaction components
         interaction.Pickup.performed += _ => playerInteraction.OnPickup();
         interaction.Activate.performed += _ => playerInteraction.OnInteract();
+        interaction.FreezeObject.performed += _ => playerInteraction.OnFreezeHeld();
 
         // Crouch
         groundMovement.Crouch.performed += _ => movement.OnCrouchPressed();

@@ -16,9 +16,9 @@ public class Interaction : MonoBehaviour
 
     GameObject heldObject;
 
+    bool isHeldFrozen = false;
     
     public Transform heldObjectPosition;
-    // Start is called before the first frame update
     void Start()
     {
         heldObject = null;
@@ -29,30 +29,45 @@ public class Interaction : MonoBehaviour
 
     public void OnPickup()
     {
+        
         // Pick up object
         if(pickupable && pickupable.GetComponent<Rigidbody>() && heldObject == null)
         {
-            Rigidbody rb = pickupable.GetComponent<Rigidbody>();
-            rb.useGravity = false;
-            rb.drag = 20;
-            rb.transform.parent = heldObjectPosition;
+            pickupable.GetComponent<PickupableInterface>().OnPickup(heldObjectPosition);
             heldObject = pickupable;
         }
         // Drop object
         else if(heldObject != null)
         {
-            Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-            rb.useGravity = true;
-            rb.drag = 1;
-            rb.transform.parent = null;
+            heldObject.GetComponent<PickupableInterface>().OnDrop();
             heldObject = null;
             pickupable = null;
         }
     }
 
+    public void OnFreezeHeld()
+    {
+        if (heldObject)
+        {
+            PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
+            if (!isHeldFrozen)
+            {
+                pickupScript.OnFreezeToView();
+            }
+            else
+            {
+                pickupScript.UnfreezeView();
+            }
+            isHeldFrozen = !isHeldFrozen;
+        }
+    }
+
     public void OnInteract()
     {
-        interactable.GetComponent<InteractableInterface>().Interact();
+        if (interactable)
+        {
+            interactable.GetComponent<InteractableInterface>().Interact();
+        }
     }
 
     // Scans for specific objects in range, with a given mask
@@ -62,11 +77,6 @@ public class Interaction : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionRange, layerMask))
         {
             GameObject detectObject = hit.collider.transform.gameObject;
-            InteractableInterface interactable = detectObject.GetComponent<InteractableInterface>();
-            if (interactable)
-            {
-                interactable.OnDetect();
-            }
             return detectObject;
         }
         return null;
@@ -78,10 +88,9 @@ public class Interaction : MonoBehaviour
         {
             return;
         }
-        if(Vector3.Distance(heldObject.transform.position, heldObjectPosition.position) > 0.1f)
+        else
         {
-            Vector3 moveDir = (heldObjectPosition.position - heldObject.transform.position);
-            heldObject.GetComponent<Rigidbody>().AddForce(moveDir * moveForce);
+            heldObject.GetComponent<PickupableInterface>().UpdateHeldObject(heldObjectPosition.position);
         }
     }
 
@@ -91,10 +100,29 @@ public class Interaction : MonoBehaviour
     {
         if(heldObject == null)
         {
-            pickupable = GetObjectInRange(pickUpMask);
+            CheckPickupables();
         }
         CheckInteractables();
         MoveHeldObject();
+    }
+
+    void CheckPickupables()
+    {
+        GameObject scannedPickupable = GetObjectInRange(pickUpMask);
+        if (scannedPickupable)
+        {
+            if(scannedPickupable != pickupable && pickupable != null)
+            {
+                pickupable.GetComponent<PickupableInterface>().OnLeave();
+            }
+            scannedPickupable.GetComponent<PickupableInterface>().OnDetect();
+            pickupable = scannedPickupable;
+        }
+        else if(pickupable != null)
+        {
+            pickupable.GetComponent<PickupableInterface>().OnLeave();
+            pickupable = null;
+        }
     }
 
     void CheckInteractables()
@@ -112,6 +140,7 @@ public class Interaction : MonoBehaviour
         else if(interactable != null)
         {
             interactable.GetComponent<InteractableInterface>().OnLeave();
+            interactable = null;
         }
     }
 }
