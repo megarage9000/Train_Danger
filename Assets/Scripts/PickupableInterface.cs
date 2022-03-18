@@ -7,7 +7,7 @@ using UnityEngine;
 public class PickupableInterface : MonoBehaviour
 {
     Outline outline;
-    Rigidbody rb;
+    protected Rigidbody rb;
     private void Awake()
     {
         outline = GetComponent<Outline>();
@@ -29,6 +29,10 @@ public class PickupableInterface : MonoBehaviour
 
     public void OnPickup(Transform parent)
     {
+        if(rb.constraints != RigidbodyConstraints.None)
+        {
+            rb.constraints = RigidbodyConstraints.None;
+        }
         rb.useGravity = false;
         rb.drag = 20;
         transform.parent = parent;

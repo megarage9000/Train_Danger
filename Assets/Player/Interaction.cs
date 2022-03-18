@@ -39,7 +39,7 @@ public class Interaction : MonoBehaviour
         // Drop object
         else if(heldObject != null)
         {
-            heldObject.GetComponent<PickupableInterface>().OnDrop();
+            pickupable.GetComponent<PickupableInterface>().OnDrop();
             heldObject = null;
             pickupable = null;
         }
@@ -49,16 +49,25 @@ public class Interaction : MonoBehaviour
     {
         if (heldObject)
         {
-            PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
-            if (!isHeldFrozen)
+            PlaceableObject placeableObject = heldObject.GetComponent<PlaceableObject>();
+            if(placeableObject && placeableObject.OnPlace())
             {
-                pickupScript.OnFreezeToView();
+                heldObject = null;
+                pickupable = null;
             }
             else
             {
-                pickupScript.UnfreezeView();
+                PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
+                if (!isHeldFrozen)
+                {
+                    pickupScript.OnFreezeToView();
+                }
+                else
+                {
+                    pickupScript.UnfreezeView();
+                }
+                isHeldFrozen = !isHeldFrozen;
             }
-            isHeldFrozen = !isHeldFrozen;
         }
     }
 
