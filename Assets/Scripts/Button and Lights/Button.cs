@@ -20,8 +20,13 @@ public class Button : InteractableInterface
     public void Awake()
     {
         buttonRenderer = GetComponent<Renderer>();
-        initialColor = buttonRenderer.material.color;
+        buttonRenderer.material.color = buttonPressColor;
         isPressed = false;
+    }
+
+    public void SetButtonColour(Color color)
+    {
+        GetComponent<Renderer>().material.color = color;
     }
 
     public override void Interact()
@@ -37,14 +42,12 @@ public class Button : InteractableInterface
         isPressed = true; 
         float increment = pressDist / 10f;
         Vector3 translation = direction * pressDist;
-        buttonRenderer.material.color = buttonPressColor;
         for(int i = 0; i < 10; i++)
         {
             transform.Translate(translation);
             yield return new WaitForSeconds(0.02f);
         }
 
-        buttonRenderer.material.color = initialColor;
         for (int i = 0; i < 10; i++)
         {
             transform.Translate(-translation);

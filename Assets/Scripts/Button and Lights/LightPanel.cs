@@ -9,10 +9,12 @@ public class LightPanel : MonoBehaviour
     public LightBulb[] lightBulbs;
 
     // Public properties we need for the button panel
-    public int[] lightPattern = { 4, 3, 2, 1, 6, 5 };
+    public int[] lightPattern;
     public Color[] lightColors;
 
-    void Start()
+    public bool isShowing;
+
+    void Awake()
     {
         int numBulbs = lightBulbs.Length;
         lightColors = new Color[lightBulbs.Length];
@@ -20,11 +22,20 @@ public class LightPanel : MonoBehaviour
         {
             lightColors[i] = lightBulbs[i].colour;
         }
-        StartCoroutine(ShowPattern());   
+        isShowing = false;
+    }
+
+    public void StartShowingPattern()
+    {
+        if (!isShowing)
+        {
+            StartCoroutine(ShowPattern());
+        }
     }
 
     IEnumerator ShowPattern()
     {
+        isShowing = true;
         int numBulbs = lightBulbs.Length;
         for(int i = 0; i < numBulbs; i++)
         {
@@ -33,6 +44,7 @@ public class LightPanel : MonoBehaviour
             yield return new WaitForSeconds(1f);
             bulb.TurnOff();
         }
+        isShowing = false;
     }
 
 }

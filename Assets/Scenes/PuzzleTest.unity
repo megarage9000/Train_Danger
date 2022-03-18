@@ -243,6 +243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 47738667}
   - component: {fileID: 47738668}
+  - component: {fileID: 47738669}
   m_Layer: 0
   m_Name: Button And Panel
   m_TagString: Untagged
@@ -282,6 +283,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &47738669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47738666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d2967bf2464f87439478ee0d7345a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 29131523}
+  - {fileID: 151962028}
+  - {fileID: 1504090577}
+  - {fileID: 360564516}
+  - {fileID: 1137077128}
+  - {fileID: 207204825}
+  buttonColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  code: 020000000400000005000000030000000100000006000000
+  lightPanel: {fileID: 250299287}
 --- !u!1001 &84767920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -509,6 +538,7 @@ MonoBehaviour:
   - {fileID: 1992494859}
   lightPattern: 040000000300000002000000010000000600000005000000
   lightColors: []
+  isShowing: 0
 --- !u!1 &360564511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1219878215272068760, guid: f74b76a942f381947a672fbc9371e061, type: 3}
