@@ -8,11 +8,18 @@ public class LightPanel : MonoBehaviour
     [SerializeField]
     public LightBulb[] lightBulbs;
 
+    // Public properties we need for the button panel
     public int[] lightPattern = { 4, 3, 2, 1, 6, 5 };
+    public Color[] lightColors;
 
-    // Start is called before the first frame update
     void Start()
     {
+        int numBulbs = lightBulbs.Length;
+        lightColors = new Color[lightBulbs.Length];
+        for(int i = 0; i < numBulbs; i++)
+        {
+            lightColors[i] = lightBulbs[i].colour;
+        }
         StartCoroutine(ShowPattern());   
     }
 
