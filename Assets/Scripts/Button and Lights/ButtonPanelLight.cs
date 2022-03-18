@@ -12,7 +12,8 @@ public class ButtonPanelLight : ButtonPanel
         for (int i = 0; i < numButtons; i++)
         {
             buttons[i].SetButtonColour(lightPanel.lightColors[i]);
+            buttons[i].buttonPressColor = lightPanel.lightColors[i];
         }
-        OnError += lightPanel.StartShowingPattern;
+        OnError.AddListener(lightPanel.StartShowingPattern);
     }
 }

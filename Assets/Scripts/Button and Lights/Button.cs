@@ -2,20 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Button : InteractableInterface
 {
-
-
     public int buttonId;
     public float pressDist;
     public Color buttonPressColor;
+    public Color errorColor;
+    public Color correctColor;
     public Vector3 direction;
     Renderer buttonRenderer;
-    Color initialColor;
     bool isPressed;
 
-    public static event Action<int> OnPressed = delegate { };
+    public UnityEvent<int> OnPressed;
 
     public void Awake()
     {
@@ -27,6 +27,24 @@ public class Button : InteractableInterface
     public void SetButtonColour(Color color)
     {
         GetComponent<Renderer>().material.color = color;
+    }
+
+    public void SetErrorColor()
+    {
+        isPressed = true;
+        SetButtonColour(errorColor);
+    }
+
+    public void SetCorrectColor()
+    {
+        isPressed = true;
+        SetButtonColour(correctColor);
+    }
+
+    public void ResetColor()
+    {
+        isPressed = false;
+        SetButtonColour(buttonPressColor);
     }
 
     public override void Interact()
@@ -54,6 +72,6 @@ public class Button : InteractableInterface
             yield return new WaitForSeconds(0.02f);
         }
         isPressed = false;
-        OnPressed(buttonId);
+        OnPressed.Invoke(buttonId);
     }
 }

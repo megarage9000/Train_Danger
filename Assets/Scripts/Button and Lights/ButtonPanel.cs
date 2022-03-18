@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonPanel : MonoBehaviour
+public class ButtonPanel : PuzzlerInterface
 {
     [SerializeField]
     public Button[] buttons;
     public Color[] buttonColors;
+    public Color errorColor;
+    public Color correctColor;
     public int[] code;
 
     int enteredIndex;
     protected int numButtons;
-
-    public static event Action OnError = delegate { };
-    public static event Action OnSuccess = delegate { };
+    bool isFlashing;
 
     protected void Awake()
     {
@@ -22,9 +22,15 @@ public class ButtonPanel : MonoBehaviour
         for(int i = 0; i < numButtons; i++)
         {
             buttons[i].SetButtonColour(buttonColors[i]);
+            buttons[i].buttonPressColor = buttonColors[i];
+            buttons[i].errorColor = errorColor;
+            buttons[i].correctColor = correctColor;
             buttons[i].buttonId = i;
+            buttons[i].OnPressed.AddListener(CheckResult);
         }
-        Button.OnPressed += CheckResult;
+        isFlashing = false;
+        OnError.AddListener(FlashError);
+        OnSuccess.AddListener(FlashCorrect);
         enteredIndex = 0;
     }
 
@@ -32,20 +38,56 @@ public class ButtonPanel : MonoBehaviour
     {
         if ((index + 1) != code[enteredIndex])
         {
-            print("Error! Invalid pattern");
-            print("Pressed = " + index + 1 + ", expected" + code[enteredIndex]);
             enteredIndex = 0;
-            OnError();
+            OnError.Invoke();
         }
         else
         {
             enteredIndex++;
             if(enteredIndex >= numButtons)
             {
-                print("Success!");
-                OnSuccess();
+                OnSuccess.Invoke();
             }
         }
+    }
+
+    private void FlashError()
+    {
+        if (!isFlashing)
+        {
+            StartCoroutine(FlashButtonColors(true));
+        }
+    }
+
+    private void FlashCorrect()
+    {
+        if (!isFlashing)
+        {
+            StartCoroutine(FlashButtonColors(false));
+        }
+    }
+
+
+    IEnumerator FlashButtonColors(bool isError)
+    {
+        isFlashing = true;
+        for(int i = 0; i < numButtons; i++)
+        {
+            if (isError)
+            {
+                buttons[i].SetErrorColor();
+            }
+            else
+            {
+                buttons[i].SetCorrectColor();
+            }
+        }
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < numButtons; i++)
+        {
+            buttons[i].ResetColor();
+        }
+        isFlashing = false;
     }
 
 }
