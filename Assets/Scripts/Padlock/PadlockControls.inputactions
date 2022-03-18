@@ -1,0 +1,54 @@
+{
+    "name": "PadlockControls",
+    "maps": [
+        {
+            "name": "Rotation",
+            "id": "7d33d157-f659-48aa-9db5-0f7502eb022f",
+            "actions": [
+                {
+                    "name": "RotateDown",
+                    "type": "Button",
+                    "id": "4b66013d-9ae2-4232-9e70-df65c914ec54",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateUp",
+                    "type": "Button",
+                    "id": "6a165afb-ba33-4ff2-9f8f-623a2a9b6b46",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a7aef70d-15e5-4078-9f04-83c6e2204962",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab5afed3-3035-4479-9ee8-ae3e1eeb732a",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
