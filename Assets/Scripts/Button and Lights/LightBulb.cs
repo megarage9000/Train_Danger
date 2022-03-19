@@ -40,7 +40,10 @@ public class LightBulb : MonoBehaviour
         lightRenderer.material.SetColor("_Color", colour);
         lightRenderer.material.EnableKeyword("_EMISSION");
         lightRenderer.material.SetColor("_EmissionColor", colour);
-        lightDetector.enabled = true;
+        if (lightDetector)
+        {
+            lightDetector.enabled = true;
+        }
     }
 
     public void TurnOff()
@@ -51,6 +54,9 @@ public class LightBulb : MonoBehaviour
         }
         lightRenderer.material = materials[0];
         lightRenderer.material.DisableKeyword("_EMISSION");
-        lightDetector.enabled = false;
+        if (lightDetector)
+        {
+            lightDetector.enabled = false;
+        }
     }
 }
