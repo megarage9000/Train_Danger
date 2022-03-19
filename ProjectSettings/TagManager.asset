@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Book
   - BookHint
+  - LightBulb
+  - LightBulbHint
+  - LightDetect
   layers:
   - Default
   - TransparentFX

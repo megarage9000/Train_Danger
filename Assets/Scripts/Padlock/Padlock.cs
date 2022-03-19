@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Padlock : MonoBehaviour
+public class Padlock : PuzzlerInterface
 {
     public int[] result;
+    public int[] code;
     private void Awake()
     {
         RotateWheel.Rotated += UpdateResult;
@@ -28,6 +29,9 @@ public class Padlock : MonoBehaviour
                 break;
         }
 
-        print(result[0] + ", " + result[1] + ", " + result[2]);
+        if(code[0] == result[0] && code[1] == result[1] && code[2] == result[2])
+        {
+            OnSuccess.Invoke();
+        }
     }
 }

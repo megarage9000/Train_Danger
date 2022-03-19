@@ -76,7 +76,6 @@ public class Movement : MonoBehaviour
                 headPosition.y *= scaleDown;
                 head.position = headPosition;
                 speed *= crouchSpeedMultiplier;
-                print(speed);
             }
             else
             {
@@ -84,7 +83,6 @@ public class Movement : MonoBehaviour
                 headPosition.y /= scaleDown;
                 head.position = headPosition;
                 speed /= crouchSpeedMultiplier;
-                print(speed);
             }
         }
     }

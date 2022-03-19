@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(Rigidbody))]
 public class PickupableInterface : MonoBehaviour
 {
+
+    public UnityEvent OnDropObj;
+    public UnityEvent OnPickupObj;
+
     Outline outline;
     protected Rigidbody rb;
     private void Awake()
@@ -36,6 +41,7 @@ public class PickupableInterface : MonoBehaviour
         rb.useGravity = false;
         rb.drag = 20;
         transform.parent = parent;
+        OnPickupObj.Invoke();
     }
 
     public void UpdateHeldObject(Vector3 position)
@@ -55,6 +61,7 @@ public class PickupableInterface : MonoBehaviour
         {
             rb.freezeRotation = false;
         }
+        OnDropObj.Invoke();
     }
 
     public void OnFreezeToView()

@@ -10,6 +10,9 @@ public class PlacementHint : MonoBehaviour
     public Vector3 desiredRotation;
     MeshRenderer render;
     Outline outline;
+    bool hasObject;
+
+    
 
     private void Awake()
     {
@@ -33,9 +36,16 @@ public class PlacementHint : MonoBehaviour
 
     public void isObjectPlaced(bool value)
     {
+        hasObject = true;
         render.enabled = !value;
         outline.enabled = !value;
     }
+
+    public bool hasObjectIn()
+    {
+        return hasObject;
+    }
+        
 
     private void OnTriggerEnter(Collider other)
     {
@@ -52,6 +62,7 @@ public class PlacementHint : MonoBehaviour
         GameObject entered = other.gameObject;
         if (entered.CompareTag(otherTag))
         {
+            hasObject = false;
             render.enabled = false;
             outline.enabled = false;
         }
