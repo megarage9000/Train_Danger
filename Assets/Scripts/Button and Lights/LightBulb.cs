@@ -16,7 +16,6 @@ public class LightBulb : MonoBehaviour
 
     private void Awake()
     {
-        colour *= 5f;
         lightRenderer = GetComponent<Renderer>();
         if (!lightRenderer)
         {

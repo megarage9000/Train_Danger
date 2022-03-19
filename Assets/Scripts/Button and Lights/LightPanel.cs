@@ -12,7 +12,7 @@ public class LightPanel : MonoBehaviour
     public int[] lightPattern;
     public Color[] lightColors;
 
-    public bool isShowing;
+    bool isShowing;
 
     void Awake()
     {
