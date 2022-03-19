@@ -94,6 +94,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7509232557743805468, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6420463300478870264, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
     - target: {fileID: -6872736557742967061, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00030009076
@@ -118,6 +122,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -3347600363919988131, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6420463300478870264, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
     - target: {fileID: -2654694434647051675, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0053000897
@@ -142,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Padlock
       objectReference: {fileID: 0}
+    - target: {fileID: 4075210778138019633, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6420463300478870264, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
     - target: {fileID: 4420237061512650440, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0022
@@ -150,6 +162,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8102081827531384054, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 5561349426305759274, guid: 129bf88025478004aab0b04120c44566, type: 3}
     - target: {fileID: 8489233544407750424, guid: 9f925ff5185350242886d8183df4e36d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.004699909
@@ -202,7 +218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1d7c0e0f7722147b5c8710be665e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSuccess:
+    m_PersistentCalls:
+      m_Calls: []
   result: 040000000400000004000000
+  code: 
 --- !u!64 &2521367307596182419
 MeshCollider:
   m_ObjectHideFlags: 0
