@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaaf74d44703344981eda621d9f496d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRange: 2
+  interactionRange: 3
   moveForce: 50
   pickUpMask:
     serializedVersion: 2
