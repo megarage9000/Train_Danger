@@ -10,6 +10,8 @@ public class PickupableInterface : MonoBehaviour
 
     public UnityEvent OnDropObj;
     public UnityEvent OnPickupObj;
+    public Vector3 freezeView = new Vector3(0f, 0f, 0f);
+    public Vector3 freezePositionOffsets = new Vector3(0f, 0f, 0f);
 
     Outline outline;
     protected Rigidbody rb;
@@ -66,8 +68,9 @@ public class PickupableInterface : MonoBehaviour
 
     public void OnFreezeToView()
     {
-        Vector3 freezeRotation = new Vector3(0.0f, 0.0f, 0.0f);
-        transform.rotation = Quaternion.Euler(freezeRotation);
+        //freezePosition = transform.position;
+        transform.localRotation = Quaternion.Euler(freezeView);
+        transform.position = (transform.position + freezePositionOffsets);
         rb.freezeRotation = true; 
     }
 

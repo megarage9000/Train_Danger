@@ -23,8 +23,8 @@ public class Interaction : MonoBehaviour
     {
         heldObject = null;
 
-        Vector3 pos = heldObjectPosition.position;
-        heldObjectPosition.position = new Vector3(pos.x, pos.y, pos.z + interactionRange);
+/*        Vector3 pos = heldObjectPosition.position;
+        heldObjectPosition.position = new Vector3(pos.x, pos.y, pos.z + interactionRange);*/
     }
 
     public void OnPickup()
