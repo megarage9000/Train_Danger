@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-
 // Code mostly from: https://www.youtube.com/watch?v=GgLREaLUaac
 public class Interaction : MonoBehaviour
 {
@@ -16,8 +15,6 @@ public class Interaction : MonoBehaviour
     GameObject interactable;
 
     GameObject heldObject;
-
-    bool isHeldFrozen = false;
     
     public Transform heldObjectPosition;
     public Rig HandRig;
@@ -26,22 +23,13 @@ public class Interaction : MonoBehaviour
     {
         heldObject = null;
         HandRig.weight = 0;
-
-/*        Vector3 pos = heldObjectPosition.position;
-        heldObjectPosition.position = new Vector3(pos.x, pos.y, pos.z + interactionRange);*/
     }
 
-    IEnumerator adjustHandRigWeight(bool isGrabbing)
+    IEnumerator adjustHandRigWeight(int finalWeight)
     {
-        var direction = 0;
-        if (isGrabbing)
+        while(HandRig.weight < finalWeight)
         {
-            direction = 1;
-        }
-
-        while(HandRig.weight < direction)
-        {
-            HandRig.weight = Mathf.Lerp(HandRig.weight, direction, 0.2f);
+            HandRig.weight = Mathf.Lerp(HandRig.weight, finalWeight, 0.2f);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -57,7 +45,7 @@ public class Interaction : MonoBehaviour
             PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
             pickupScript.OnPickup(heldObjectPosition);
             pickupScript.OnFreezeToView();
-            StartCoroutine(adjustHandRigWeight(true));
+            StartCoroutine(adjustHandRigWeight(1));
         }
         // Drop object
         else if(heldObject != null)
@@ -66,7 +54,7 @@ public class Interaction : MonoBehaviour
             pickupScript.UnfreezeView();
             pickupScript.OnDrop();
             heldObject = null;
-            StartCoroutine(adjustHandRigWeight(false));
+            StartCoroutine(adjustHandRigWeight(0));
         }
     }
 
@@ -92,30 +80,6 @@ public class Interaction : MonoBehaviour
         }
     }
 
-    // Scans for specific objects in range, with a given mask
-    GameObject GetObjectInRange(LayerMask layerMask)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionRange, layerMask))
-        {
-            GameObject detectObject = hit.collider.transform.gameObject;
-            return detectObject;
-        }
-        return null;
-    }
-
-    void MoveHeldObject()
-    {
-        if(heldObject == null)
-        {
-            return;
-        }
-        else
-        {
-            heldObject.GetComponent<PickupableInterface>().UpdateHeldObject(heldObjectPosition.position);
-        }
-    }
-
 
     // Update is called once per frame
     void Update()
@@ -125,12 +89,11 @@ public class Interaction : MonoBehaviour
             CheckPickupables();
         }
         CheckInteractables();
-        // MoveHeldObject();
     }
 
     void CheckPickupables()
     {
-        GameObject scannedPickupable = GetObjectInRange(pickUpMask);
+        GameObject scannedPickupable = Utilities.GetObjectInRange(pickUpMask, interactionRange, transform);
         if (scannedPickupable)
         {
             if(scannedPickupable != pickupable && pickupable != null)
@@ -149,7 +112,7 @@ public class Interaction : MonoBehaviour
 
     void CheckInteractables()
     {
-        GameObject scannedInteractable = GetObjectInRange(interactionMask);
+        GameObject scannedInteractable = Utilities.GetObjectInRange(interactionMask, interactionRange, transform);
         if (scannedInteractable)
         {
             if(scannedInteractable != interactable && interactable != null)

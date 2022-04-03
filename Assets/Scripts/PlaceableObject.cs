@@ -8,6 +8,7 @@ public class PlaceableObject : PickupableInterface
     GameObject placeableLocation;
     public string placeableLocationTag;
     public UnityEvent OnPlaceObj;
+    public float range = 4f;
 
     public bool OnPlace()
     {
@@ -32,46 +33,41 @@ public class PlaceableObject : PickupableInterface
         return false;
     }
 
-    
-
-    private void OnTriggerEnter(Collider collision)
+    public void Update()
     {
-        GameObject detectedObject = collision.gameObject;
-        if (detectedObject.CompareTag(placeableLocationTag))
+        GameObject gameObject = Utilities.GetObjectInRange(range, transform);
+        if (gameObject && gameObject.CompareTag(placeableLocationTag))
         {
-            // Compare to the current one if it is closer;
             if (placeableLocation)
             {
-                float dist1 = Vector3.Distance(placeableLocation.transform.position, transform.position);
-                float dist2 = Vector3.Distance(detectedObject.transform.position, transform.position);
+                HidePreviousHint();
+            }
 
-                placeableLocation = (dist1 > dist2) ? detectedObject : placeableLocation;
-            }
-            else
-            {
-                placeableLocation = detectedObject;
-            }
+            placeableLocation = gameObject;
+            ShowNewHint();
+
+        }
+        else if(placeableLocation != null)
+        {
+            HidePreviousHint();
         }
     }
 
-    private void OnTriggerStay(Collider collision)
+    void ShowNewHint()
     {
-        if(placeableLocation == null)
+        PlacementHint hintScript = placeableLocation.GetComponent<PlacementHint>();
+        if (hintScript)
         {
-            GameObject detectedObject = collision.gameObject;
-            if (detectedObject.CompareTag(placeableLocationTag))
-            {
-                placeableLocation = detectedObject;
-            }
+            hintScript.ShowHint();
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    void HidePreviousHint()
     {
-        GameObject detectedObject = collision.gameObject;
-        if (detectedObject.CompareTag(placeableLocationTag))
+        PlacementHint hintScript = placeableLocation.GetComponent<PlacementHint>();
+        if (hintScript)
         {
-            placeableLocation = null;
+            hintScript.HideHint();
         }
     }
 }
