@@ -13,6 +13,10 @@ public class PickupableInterface : MonoBehaviour
     public Vector3 freezeView = new Vector3(0f, 0f, 0f);
     public Vector3 freezePositionOffsets = new Vector3(0f, 0f, 0f);
 
+    [SerializeField]
+    [Range(0, 1)]
+    public float gripStrength = 0.5f;
+
     Outline outline;
     protected Rigidbody rb;
     private void Awake()

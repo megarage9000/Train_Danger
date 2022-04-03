@@ -25,11 +25,20 @@ public class Interaction : MonoBehaviour
         HandRig.weight = 0;
     }
 
-    IEnumerator adjustHandRigWeight(int finalWeight)
+    IEnumerator adjustHandRigWeight(float finalWeight)
     {
-        while(HandRig.weight < finalWeight)
+        while (HandRig.weight < finalWeight - 0.05)
         {
-            HandRig.weight = Mathf.Lerp(HandRig.weight, finalWeight, 0.2f);
+            HandRig.weight = Mathf.Lerp(HandRig.weight, finalWeight, 0.7f);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator OpenHand()
+    {
+        while(HandRig.weight > 0.01)
+        {
+            HandRig.weight = Mathf.Lerp(HandRig.weight, 0, 0.7f);
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -45,6 +54,7 @@ public class Interaction : MonoBehaviour
             PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
             pickupScript.OnPickup(heldObjectPosition);
             pickupScript.OnFreezeToView();
+            StopAllCoroutines();
             StartCoroutine(adjustHandRigWeight(1));
         }
         // Drop object
@@ -54,7 +64,8 @@ public class Interaction : MonoBehaviour
             pickupScript.UnfreezeView();
             pickupScript.OnDrop();
             heldObject = null;
-            StartCoroutine(adjustHandRigWeight(0));
+            StopAllCoroutines();
+            StartCoroutine(OpenHand());
         }
     }
 
@@ -68,6 +79,7 @@ public class Interaction : MonoBehaviour
             {
                 heldObject = null;
                 pickupable = null;
+                StartCoroutine(OpenHand());
             }
         }
     }
