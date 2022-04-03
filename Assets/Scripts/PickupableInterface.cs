@@ -47,6 +47,7 @@ public class PickupableInterface : MonoBehaviour
         rb.useGravity = false;
         rb.drag = 20;
         transform.position = parent.position;
+        transform.rotation = parent.rotation;
         transform.parent = parent;
         OnPickupObj.Invoke();
     }
@@ -75,7 +76,8 @@ public class PickupableInterface : MonoBehaviour
     {
         //freezePosition = transform.position;
         transform.localRotation = Quaternion.Euler(freezeView);
-        transform.position = (transform.position + freezePositionOffsets);
+        Vector3 forwardOffset = transform.TransformDirection(freezePositionOffsets);
+        transform.position += forwardOffset;
         rb.freezeRotation = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }

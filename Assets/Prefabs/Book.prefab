@@ -100,9 +100,9 @@ MonoBehaviour:
   OnPickupObj:
     m_PersistentCalls:
       m_Calls: []
-  freezeView: {x: 0, y: 0, z: 0}
-  freezePositionOffsets: {x: 0, y: 0, z: 0.5}
-  gripStrength: 0.2
+  freezeView: {x: 0, y: -75, z: 0}
+  freezePositionOffsets: {x: 0.1, y: 0, z: 0.3}
+  gripStrength: 0.1
   placeableLocationTag: BookHint
   OnPlaceObj:
     m_PersistentCalls:

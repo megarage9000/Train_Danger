@@ -54,8 +54,9 @@ public class Interaction : MonoBehaviour
             PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
             pickupScript.OnPickup(heldObjectPosition);
             pickupScript.OnFreezeToView();
-            StopAllCoroutines();
-            StartCoroutine(adjustHandRigWeight(1));
+            /*            StopAllCoroutines();
+                        StartCoroutine(adjustHandRigWeight(1));*/
+            HandRig.weight = pickupScript.gripStrength;
         }
         // Drop object
         else if(heldObject != null)
@@ -64,7 +65,8 @@ public class Interaction : MonoBehaviour
             pickupScript.UnfreezeView();
             pickupScript.OnDrop();
             heldObject = null;
-            StopAllCoroutines();
+            /*            StopAllCoroutines();
+                        StartCoroutine(OpenHand());*/
             StartCoroutine(OpenHand());
         }
     }
