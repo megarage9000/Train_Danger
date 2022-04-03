@@ -5,7 +5,7 @@ using UnityEngine;
 // Refer to: https://www.youtube.com/watch?v=tXDgSGOEatk&t
 public class Movement : MonoBehaviour
 {
-    [SerializeField] CharacterController controller;
+    // [SerializeField] CharacterController controller;
     [SerializeField] float speed = 10f;
     Vector2 horizontalInput;
 
@@ -21,28 +21,24 @@ public class Movement : MonoBehaviour
     [SerializeField] float crouchSpeedMultiplier = 0.5f;
     public Transform head;
     bool isCrouch = false;
+
+    Rigidbody rb;
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
     public void ReceiveInput(Vector2 _horizontalInput)
     {
         horizontalInput = _horizontalInput;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        // Checks if the transform position (feet) intersects with the ground mask
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundMask);
-        if(isGrounded)
+        if (isGrounded)
         {
             verticalVelocity.y = 0;
         }
-
-        var vertSpeed = horizontalInput.y * speed * Time.deltaTime;
-        var horzSpeed = horizontalInput.x * speed * Time.deltaTime;
-        
-        var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
-        movementSpeed = transform.TransformDirection(movementSpeed);
-        controller.Move(movementSpeed);
 
         // Jump first before gravity
         if (isJump)
@@ -50,14 +46,34 @@ public class Movement : MonoBehaviour
             if (isGrounded)
             {
                 // Jump equation
-                verticalVelocity.y = Mathf.Sqrt(-2f * jumpHeight * gravity);
+                var calcJump = Mathf.Sqrt(-2f * jumpHeight * gravity);
+                rb.AddForce(Vector3.up * calcJump, ForceMode.VelocityChange);
             }
             isJump = false;
         }
 
-        verticalVelocity.y += gravity * Time.deltaTime;
-        controller.Move(verticalVelocity * Time.deltaTime);
 
+        /*        verticalVelocity.y += gravity * Time.fixedDeltaTime;
+        // controller.Move(verticalVelocity * Time.deltaTime);
+        rb.AddForce(verticalVelocity * 100f)*/;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        // Checks if the transform position (feet) intersects with the ground mask
+
+        if (isGrounded)
+        {
+            var vertSpeed = horizontalInput.y * speed * Time.fixedDeltaTime;
+            var horzSpeed = horizontalInput.x * speed * Time.fixedDeltaTime;
+
+            var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
+            movementSpeed = transform.TransformDirection(movementSpeed);
+
+            // controller.Move(movementSpeed);
+            rb.MovePosition(transform.position + movementSpeed);
+        }
     }
 
     public void OnJumpedPressed()
