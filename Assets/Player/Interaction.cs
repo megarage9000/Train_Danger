@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 // Code mostly from: https://www.youtube.com/watch?v=GgLREaLUaac
 public class Interaction : MonoBehaviour
@@ -19,12 +20,30 @@ public class Interaction : MonoBehaviour
     bool isHeldFrozen = false;
     
     public Transform heldObjectPosition;
+    public Rig HandRig;
+
     void Start()
     {
         heldObject = null;
+        HandRig.weight = 0;
 
 /*        Vector3 pos = heldObjectPosition.position;
         heldObjectPosition.position = new Vector3(pos.x, pos.y, pos.z + interactionRange);*/
+    }
+
+    IEnumerator adjustHandRigWeight(bool isGrabbing)
+    {
+        var direction = 0;
+        if (isGrabbing)
+        {
+            direction = 1;
+        }
+
+        while(HandRig.weight < direction)
+        {
+            HandRig.weight = Mathf.Lerp(HandRig.weight, direction, 0.2f);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     public void OnPickup()
@@ -33,15 +52,21 @@ public class Interaction : MonoBehaviour
         // Pick up object
         if(pickupable && pickupable.GetComponent<Rigidbody>() && heldObject == null)
         {
-            pickupable.GetComponent<PickupableInterface>().OnPickup(heldObjectPosition);
+
             heldObject = pickupable;
+            PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
+            pickupScript.OnPickup(heldObjectPosition);
+            pickupScript.OnFreezeToView();
+            StartCoroutine(adjustHandRigWeight(true));
         }
         // Drop object
         else if(heldObject != null)
         {
-            pickupable.GetComponent<PickupableInterface>().OnDrop();
+            PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
+            pickupScript.UnfreezeView();
+            pickupScript.OnDrop();
             heldObject = null;
-            pickupable = null;
+            StartCoroutine(adjustHandRigWeight(false));
         }
     }
 
@@ -55,19 +80,6 @@ public class Interaction : MonoBehaviour
             {
                 heldObject = null;
                 pickupable = null;
-            }
-            else
-            {
-                PickupableInterface pickupScript = heldObject.GetComponent<PickupableInterface>();
-                if (!isHeldFrozen)
-                {
-                    pickupScript.OnFreezeToView();
-                }
-                else
-                {
-                    pickupScript.UnfreezeView();
-                }
-                isHeldFrozen = !isHeldFrozen;
             }
         }
     }
@@ -113,7 +125,7 @@ public class Interaction : MonoBehaviour
             CheckPickupables();
         }
         CheckInteractables();
-        MoveHeldObject();
+        // MoveHeldObject();
     }
 
     void CheckPickupables()
