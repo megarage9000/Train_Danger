@@ -72,12 +72,17 @@ public class PickupableInterface : MonoBehaviour
         OnDropObj.Invoke();
     }
 
-    public void OnFreezeToView()
+    void ApplyOffsets()
     {
         //freezePosition = transform.position;
         transform.localRotation = Quaternion.Euler(freezeView);
         Vector3 forwardOffset = transform.TransformDirection(freezePositionOffsets);
         transform.position += forwardOffset;
+    }
+
+    public void OnFreezeToView()
+    {
+        ApplyOffsets();
         rb.freezeRotation = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
