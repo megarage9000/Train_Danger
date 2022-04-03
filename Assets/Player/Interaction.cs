@@ -38,8 +38,8 @@ public class Interaction : MonoBehaviour
     {
         while(HandRig.weight > 0.01)
         {
-            HandRig.weight = Mathf.Lerp(HandRig.weight, 0, 0.7f);
-            yield return new WaitForSeconds(0.1f);
+            HandRig.weight = Mathf.Lerp(HandRig.weight, 0, 0.2f);
+            yield return new WaitForSeconds(1.0f/60.0f);
         }
     }
 

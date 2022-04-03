@@ -153,4 +153,4 @@ MonoBehaviour:
       m_Calls: []
   freezeView: {x: 0, y: 0, z: 0}
   freezePositionOffsets: {x: -0.05, y: 0, z: 0.1}
-  gripStrength: 0.6
+  gripStrength: 0.5
