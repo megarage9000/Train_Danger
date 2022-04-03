@@ -63,9 +63,10 @@ public class Movement : MonoBehaviour
     {
         // Checks if the transform position (feet) intersects with the ground mask
 
-        if (isGrounded)
+/*        if (isGrounded)
         {
-            var vertSpeed = horizontalInput.y * speed * Time.fixedDeltaTime;
+        }
+*/            var vertSpeed = horizontalInput.y * speed * Time.fixedDeltaTime;
             var horzSpeed = horizontalInput.x * speed * Time.fixedDeltaTime;
 
             var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
@@ -73,7 +74,6 @@ public class Movement : MonoBehaviour
 
             // controller.Move(movementSpeed);
             rb.MovePosition(transform.position + movementSpeed);
-        }
     }
 
     public void OnJumpedPressed()
