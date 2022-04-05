@@ -10,6 +10,13 @@ public class PlaceableObject : PickupableInterface
     public UnityEvent OnPlaceObj;
     public float range = 4f;
 
+    public Transform placeDirection;
+
+    private void Start()
+    {
+        placeDirection = null;
+    }
+
     public bool OnPlace()
     {
         if(placeableLocation)
@@ -26,6 +33,7 @@ public class PlaceableObject : PickupableInterface
                 hint.isObjectPlaced(true);
                 OnLeave();
                 OnPlaceObj.Invoke();
+                placeDirection = null;
                 return true;
             }
             return false;
@@ -35,21 +43,24 @@ public class PlaceableObject : PickupableInterface
 
     public void Update()
     {
-        GameObject gameObject = Utilities.GetObjectInRange(range, transform);
-        if (gameObject && gameObject.CompareTag(placeableLocationTag))
+        if (placeDirection != null)
         {
-            if (placeableLocation)
+            GameObject gameObject = Utilities.GetObjectInRange(range, placeDirection);
+            if (gameObject && gameObject.CompareTag(placeableLocationTag))
+            {
+                if (placeableLocation)
+                {
+                    HidePreviousHint();
+                }
+
+                placeableLocation = gameObject;
+                ShowNewHint();
+
+            }
+            else if(placeableLocation != null)
             {
                 HidePreviousHint();
             }
-
-            placeableLocation = gameObject;
-            ShowNewHint();
-
-        }
-        else if(placeableLocation != null)
-        {
-            HidePreviousHint();
         }
     }
 
