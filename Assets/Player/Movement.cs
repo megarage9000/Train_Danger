@@ -50,8 +50,9 @@ public class Movement : MonoBehaviour
         // Jump first before gravity
         if (isJump)
         {
-            if (isGrounded)
+            if (isGrounded && !isCrouch)
             {
+                StopCoroutine(crouchRoutine);
                 // Jump equation
                 var calcJump = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 rb.AddForce(Vector3.up * calcJump, ForceMode.VelocityChange);
