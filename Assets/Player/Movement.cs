@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // Refer to: https://www.youtube.com/watch?v=tXDgSGOEatk&t
 public class Movement : MonoBehaviour
@@ -24,6 +25,10 @@ public class Movement : MonoBehaviour
 
     Rigidbody rb;
     AudioSource footstepSource;
+
+    [SerializeField]
+    public UnityEvent OnPlayerMove;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -69,6 +74,7 @@ public class Movement : MonoBehaviour
 
         if(movementSpeed.magnitude > 0f)
         {
+            OnPlayerMove.Invoke();
             PlayFootsteps();
         }
 
