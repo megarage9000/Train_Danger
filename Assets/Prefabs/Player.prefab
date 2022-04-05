@@ -759,8 +759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20738cff10238a4448dbaefcae93fe39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amp: 0.015
-  freq: 10
+  amp: 0.01
+  freq: 13
   cameraPos: {fileID: 805645425862398591}
   cameraHolder: {fileID: 4103727548417452379}
 --- !u!1 &2806059900176361616

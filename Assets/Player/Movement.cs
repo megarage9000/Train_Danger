@@ -86,6 +86,35 @@ public class Movement : MonoBehaviour
         isJump = true;
     }
 
+    IEnumerator AdjustHeight(float multiplier)
+    {
+        Vector3 headPosition = head.position;
+        float desiredCrouch = headPosition.y * multiplier;
+        float height = headPosition.y;
+
+        if(height < desiredCrouch)
+        {
+            while(desiredCrouch >= height)
+            {
+                height = Mathf.Lerp(height, desiredCrouch, 0.5f);
+                headPosition = head.position;
+                head.position = new Vector3(headPosition.x, height, headPosition.z);
+                yield return new WaitForSeconds(1.0f / 120f);
+            }
+        }
+        else
+        {
+            while (desiredCrouch <= height)
+            {
+                height = Mathf.Lerp(height, desiredCrouch, 0.5f);
+                headPosition = head.position;
+                head.position = new Vector3(headPosition.x, height, headPosition.z);
+                yield return new WaitForSeconds(1.0f / 120f);
+            }
+        }
+    }
+
+    Coroutine crouchRoutine = null;
     public void OnCrouchPressed()
     {
         if (isGrounded)
@@ -93,16 +122,20 @@ public class Movement : MonoBehaviour
             isCrouch = !isCrouch;
             if(isCrouch)
             {
-                Vector3 headPosition = head.position;
-                headPosition.y *= scaleDown;
-                head.position = headPosition;
+                if(crouchRoutine != null)
+                {
+                    StopCoroutine(crouchRoutine);
+                }
+                crouchRoutine = StartCoroutine(AdjustHeight(scaleDown));
                 speed *= crouchSpeedMultiplier;
             }
             else
             {
-                Vector3 headPosition = head.position;
-                headPosition.y /= scaleDown;
-                head.position = headPosition;
+                if (crouchRoutine != null)
+                {
+                    StopCoroutine(crouchRoutine);
+                }
+                crouchRoutine = StartCoroutine(AdjustHeight(1.0f / scaleDown));
                 speed /= crouchSpeedMultiplier;
             }
         }
