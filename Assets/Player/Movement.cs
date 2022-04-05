@@ -23,9 +23,11 @@ public class Movement : MonoBehaviour
     bool isCrouch = false;
 
     Rigidbody rb;
+    AudioSource footstepSource;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        footstepSource = GetComponent<AudioSource>();
     }
     public void ReceiveInput(Vector2 _horizontalInput)
     {
@@ -53,27 +55,24 @@ public class Movement : MonoBehaviour
         }
 
 
-        /*        verticalVelocity.y += gravity * Time.fixedDeltaTime;
-        // controller.Move(verticalVelocity * Time.deltaTime);
-        rb.AddForce(verticalVelocity * 100f)*/;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Checks if the transform position (feet) intersects with the ground mask
 
-/*        if (isGrounded)
+        var vertSpeed = horizontalInput.y * speed * Time.fixedDeltaTime;
+        var horzSpeed = horizontalInput.x * speed * Time.fixedDeltaTime;
+
+        var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
+        movementSpeed = transform.TransformDirection(movementSpeed);
+
+        if(movementSpeed.magnitude > 0f)
         {
+            PlayFootsteps();
         }
-*/            var vertSpeed = horizontalInput.y * speed * Time.fixedDeltaTime;
-            var horzSpeed = horizontalInput.x * speed * Time.fixedDeltaTime;
 
-            var movementSpeed = new Vector3(horzSpeed, 0, vertSpeed);
-            movementSpeed = transform.TransformDirection(movementSpeed);
-
-            // controller.Move(movementSpeed);
-            rb.MovePosition(transform.position + movementSpeed);
+        rb.MovePosition(transform.position + movementSpeed);
     }
 
     public void OnJumpedPressed()
@@ -100,6 +99,28 @@ public class Movement : MonoBehaviour
                 head.position = headPosition;
                 speed /= crouchSpeedMultiplier;
             }
+        }
+    }
+
+    bool isFootstepPlaying = false;
+    IEnumerator PlayFootstepSound()
+    {
+        if (!isFootstepPlaying)
+        {
+            isFootstepPlaying = true;
+            footstepSource.volume = Random.Range(0.8f, 1.0f);
+            footstepSource.pitch = Random.Range(0.8f, 1.0f);
+            footstepSource.Play();
+            yield return new WaitForSeconds(0.5f);
+            isFootstepPlaying = false;
+        }
+    }
+
+    void PlayFootsteps()
+    {
+        if(isGrounded && !footstepSource.isPlaying)
+        {
+            StartCoroutine(PlayFootstepSound());
         }
     }
 }
