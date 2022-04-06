@@ -29,6 +29,8 @@ public class Movement : MonoBehaviour
     [SerializeField]
     public UnityEvent OnPlayerMove;
 
+    Coroutine crouchRoutine = null;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -52,7 +54,10 @@ public class Movement : MonoBehaviour
         {
             if (isGrounded && !isCrouch)
             {
-                StopCoroutine(crouchRoutine);
+                if (crouchRoutine != null)
+                {
+                    StopCoroutine(crouchRoutine);
+                }
                 // Jump equation
                 var calcJump = Mathf.Sqrt(-2f * jumpHeight * gravity);
                 rb.AddForce(Vector3.up * calcJump, ForceMode.VelocityChange);
@@ -115,7 +120,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    Coroutine crouchRoutine = null;
+    
     public void OnCrouchPressed()
     {
         if (isGrounded)

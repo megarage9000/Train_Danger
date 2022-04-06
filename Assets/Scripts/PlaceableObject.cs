@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlaceableObject : PickupableInterface
 {
-    GameObject placeableLocation;
+    public GameObject placeableLocation;
     public string placeableLocationTag;
     public UnityEvent OnPlaceObj;
     public float range = 4f;
@@ -80,5 +80,6 @@ public class PlaceableObject : PickupableInterface
         {
             hintScript.HideHint();
         }
+        placeableLocation = null;
     }
 }
