@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4408421745103451396}
   - component: {fileID: 6432863112544790225}
   - component: {fileID: 6083789202001968663}
+  - component: {fileID: 3525055872811037526}
   m_Layer: 7
   m_Name: Paper
   m_TagString: Untagged
@@ -154,3 +155,31 @@ MonoBehaviour:
   freezeView: {x: 0, y: -75, z: 90}
   freezePositionOffsets: {x: 0, y: -0.05, z: 0.5}
   gripStrength: 0.5
+--- !u!114 &3525055872811037526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7899833075651907421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d378240ea97214ab2d7c0d4c637342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDropObj:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPickupObj:
+    m_PersistentCalls:
+      m_Calls: []
+  freezeView: {x: 0, y: 0, z: 0}
+  freezePositionOffsets: {x: 0, y: 0, z: 0}
+  gripStrength: 0.5
+  placeableLocation: {fileID: 0}
+  placeableLocationTag: PaperHint
+  OnPlaceObj:
+    m_PersistentCalls:
+      m_Calls: []
+  range: 4
+  placeDirection: {fileID: 0}
