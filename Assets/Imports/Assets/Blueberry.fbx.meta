@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Blueberry
-    second: {fileID: 5561349426305759274, guid: 87c219555a76dff45a5a659341c9e8b3, type: 3}
+    second: {fileID: 2100000, guid: 460b2504f55373b47b8e3613e5e91141, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Bottle2
-    second: {fileID: 5561349426305759274, guid: dd81346ce8304954ab5c97dd553226cb, type: 3}
+    second: {fileID: 2100000, guid: 460b2504f55373b47b8e3613e5e91141, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
