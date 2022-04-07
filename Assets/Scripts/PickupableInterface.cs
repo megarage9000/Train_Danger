@@ -97,7 +97,7 @@ public class PickupableInterface : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(OnCollisionEvent != null)
+        if(OnCollisionEvent != null && transform.parent == null)
         {
             OnCollisionEvent.Invoke();
         }
