@@ -376,8 +376,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 6322206809128188926}
-  vaultOpenNoise: {fileID: 8300000, guid: bfb75492ff90c04448cb53ea46fba6bd, type: 3}
-  vaultUnlockNoise: {fileID: 8300000, guid: d2fe5399a63fe8642aea9bb42375e206, type: 3}
+  vaultOpenNoise: {fileID: 8300000, guid: f8c34e3fab5bedf4b974f9011f127e5d, type: 3}
+  vaultUnlockNoise: {fileID: 8300000, guid: d3d45633143891d408b0be16b8a92fb9, type: 3}
   lockFloorHitNoise: {fileID: 8300000, guid: 07a4147cf64cc7f4c96f6fe8e5b8a252, type: 3}
 --- !u!82 &6322206809128188926
 AudioSource:
@@ -391,7 +391,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1644,7 +1644,7 @@ Transform:
   - {fileID: 548127230969522619}
   m_Father: {fileID: 1644818272174379747}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -157.78206}
 --- !u!33 &5972746205031886104
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2038,15 +2038,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8682204018928098806, guid: 16b73384210327745bf422c8090ccc45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -21.078327
       objectReference: {fileID: 0}
     - target: {fileID: 8682204018928098806, guid: 16b73384210327745bf422c8090ccc45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 88.24283
       objectReference: {fileID: 0}
     - target: {fileID: 8682204018928098806, guid: 16b73384210327745bf422c8090ccc45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
+      value: -0.101532675
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16b73384210327745bf422c8090ccc45, type: 3}
