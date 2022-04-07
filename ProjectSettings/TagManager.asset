@@ -12,6 +12,7 @@ TagManager:
   - PaperHint
   - KeyHint
   - WineHint
+  - Wine
   layers:
   - Default
   - TransparentFX

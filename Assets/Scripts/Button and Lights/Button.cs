@@ -16,6 +16,7 @@ public class Button : InteractableInterface
     bool isPressed;
 
     public UnityEvent<int> OnPressed;
+    public UnityEvent PlayNoise;
 
     public void Awake()
     {
@@ -57,6 +58,7 @@ public class Button : InteractableInterface
 
     IEnumerator OnPress()
     {
+        PlayNoise.Invoke();
         isPressed = true; 
         float increment = pressDist / 10f;
         Vector3 translation = direction * pressDist;
@@ -73,5 +75,6 @@ public class Button : InteractableInterface
         }
         isPressed = false;
         OnPressed.Invoke(buttonId);
+        
     }
 }
