@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -12,7 +13,7 @@ public class PlacementHint : MonoBehaviour
     Outline outline;
     bool hasObject;
 
-    
+    public UnityEvent onObjectPlacedEvent;
 
     private void Awake()
     {
@@ -36,9 +37,13 @@ public class PlacementHint : MonoBehaviour
 
     public void isObjectPlaced(bool value)
     {
-        hasObject = true;
+        hasObject = value;
         render.enabled = !value;
         outline.enabled = !value;
+        if(onObjectPlacedEvent != null)
+        {
+            onObjectPlacedEvent.Invoke();
+        }
     }
 
     public bool hasObjectIn()

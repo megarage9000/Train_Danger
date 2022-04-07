@@ -41,6 +41,18 @@ public class PlaceableObject : PickupableInterface
         return false;
     }
 
+    public void OnRemove()
+    {
+        if (placeableLocation)
+        {
+            PlacementHint hint = placeableLocation.GetComponent<PlacementHint>();
+            if(hint && hint.hasObjectIn())
+            {
+                hint.isObjectPlaced(false);
+            }
+        }
+    }
+
     public void Update()
     {
         if (placeDirection != null)
