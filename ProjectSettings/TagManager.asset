@@ -9,6 +9,7 @@ TagManager:
   - LightBulb
   - LightBulbHint
   - LightDetect
+  - PaperHint
   layers:
   - Default
   - TransparentFX
