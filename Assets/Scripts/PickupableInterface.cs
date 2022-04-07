@@ -10,6 +10,12 @@ public class PickupableInterface : MonoBehaviour
 
     public UnityEvent OnDropObj;
     public UnityEvent OnPickupObj;
+    public Vector3 freezeView = new Vector3(0f, 0f, 0f);
+    public Vector3 freezePositionOffsets = new Vector3(0f, 0f, 0f);
+
+    [SerializeField]
+    [Range(0, 1)]
+    public float gripStrength = 0.5f;
 
     Outline outline;
     protected Rigidbody rb;
@@ -40,6 +46,8 @@ public class PickupableInterface : MonoBehaviour
         }
         rb.useGravity = false;
         rb.drag = 20;
+        transform.position = parent.position;
+        transform.rotation = parent.rotation;
         transform.parent = parent;
         OnPickupObj.Invoke();
     }
@@ -64,16 +72,25 @@ public class PickupableInterface : MonoBehaviour
         OnDropObj.Invoke();
     }
 
+    void ApplyOffsets()
+    {
+        //freezePosition = transform.position;
+        transform.localRotation = Quaternion.Euler(freezeView);
+        Vector3 forwardOffset = transform.TransformDirection(freezePositionOffsets);
+        transform.position += forwardOffset;
+    }
+
     public void OnFreezeToView()
     {
-        Vector3 freezeRotation = new Vector3(0.0f, 0.0f, 0.0f);
-        transform.rotation = Quaternion.Euler(freezeRotation);
-        rb.freezeRotation = true; 
+        ApplyOffsets();
+        rb.freezeRotation = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 
     public void UnfreezeView()
     {
         rb.freezeRotation = false;
+        rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(new Vector3(50, 0, 0));
     }
 }
