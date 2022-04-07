@@ -26,4 +26,12 @@ public class Utilities
         }
         return null;
     }
+
+    public static void playSound(AudioSource audioSource, AudioClip clip)
+    {
+        if(audioSource && !audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
 }
