@@ -46,25 +46,16 @@ public class PlacementHint : MonoBehaviour
         return hasObject;
     }
         
-
-    private void OnTriggerEnter(Collider other)
+    public void ShowHint()
     {
-        GameObject entered = other.gameObject;
-        if (entered.CompareTag(otherTag))
-        {
-            render.enabled = true;
-            outline.enabled = true;
-        }
+        render.enabled = true;
+        outline.enabled = true;
     }
 
-    private void OnTriggerExit(Collider other)
+    public void HideHint()
     {
-        GameObject entered = other.gameObject;
-        if (entered.CompareTag(otherTag))
-        {
-            hasObject = false;
-            render.enabled = false;
-            outline.enabled = false;
-        }
+        hasObject = false;
+        render.enabled = false;
+        outline.enabled = false;
     }
 }

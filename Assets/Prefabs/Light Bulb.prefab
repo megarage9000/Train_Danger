@@ -408,6 +408,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  freezeView: {x: 0, y: 0, z: 0}
+  freezePositionOffsets: {x: 0, y: 0, z: 0}
+  gripStrength: 0.9
   placeableLocationTag: LightBulbHint
   OnPlaceObj:
     m_PersistentCalls:
@@ -424,6 +427,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  range: 4
 --- !u!114 &8411209392733959783
 MonoBehaviour:
   m_ObjectHideFlags: 0

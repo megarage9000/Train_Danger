@@ -5,9 +5,17 @@ using UnityEngine.Events;
 
 public class PlaceableObject : PickupableInterface
 {
-    GameObject placeableLocation;
+    public GameObject placeableLocation;
     public string placeableLocationTag;
     public UnityEvent OnPlaceObj;
+    public float range = 4f;
+
+    public Transform placeDirection;
+
+    private void Start()
+    {
+        placeDirection = null;
+    }
 
     public bool OnPlace()
     {
@@ -25,6 +33,7 @@ public class PlaceableObject : PickupableInterface
                 hint.isObjectPlaced(true);
                 OnLeave();
                 OnPlaceObj.Invoke();
+                placeDirection = null;
                 return true;
             }
             return false;
@@ -32,46 +41,45 @@ public class PlaceableObject : PickupableInterface
         return false;
     }
 
-    
-
-    private void OnTriggerEnter(Collider collision)
+    public void Update()
     {
-        GameObject detectedObject = collision.gameObject;
-        if (detectedObject.CompareTag(placeableLocationTag))
+        if (placeDirection != null)
         {
-            // Compare to the current one if it is closer;
-            if (placeableLocation)
+            GameObject gameObject = Utilities.GetObjectInRange(range, placeDirection);
+            if (gameObject && gameObject.CompareTag(placeableLocationTag))
             {
-                float dist1 = Vector3.Distance(placeableLocation.transform.position, transform.position);
-                float dist2 = Vector3.Distance(detectedObject.transform.position, transform.position);
+                if (placeableLocation)
+                {
+                    HidePreviousHint();
+                }
 
-                placeableLocation = (dist1 > dist2) ? detectedObject : placeableLocation;
-            }
-            else
-            {
-                placeableLocation = detectedObject;
-            }
-        }
-    }
+                placeableLocation = gameObject;
+                ShowNewHint();
 
-    private void OnTriggerStay(Collider collision)
-    {
-        if(placeableLocation == null)
-        {
-            GameObject detectedObject = collision.gameObject;
-            if (detectedObject.CompareTag(placeableLocationTag))
+            }
+            else if(placeableLocation != null)
             {
-                placeableLocation = detectedObject;
+                HidePreviousHint();
             }
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    void ShowNewHint()
     {
-        GameObject detectedObject = collision.gameObject;
-        if (detectedObject.CompareTag(placeableLocationTag))
+        PlacementHint hintScript = placeableLocation.GetComponent<PlacementHint>();
+        if (hintScript)
         {
-            placeableLocation = null;
+            hintScript.ShowHint();
         }
+    }
+
+    void HidePreviousHint()
+    {
+        PlacementHint hintScript = placeableLocation.GetComponent<PlacementHint>();
+        if (hintScript)
+        {
+            hintScript.HideHint();
+        }
+        placeableLocation = null;
     }
 }
