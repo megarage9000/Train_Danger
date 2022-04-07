@@ -21,13 +21,13 @@ public class TrunkDoor : MonoBehaviour
     IEnumerator MoveDoor(bool direction)
     {
         isMoving = true;
-        float increment = rotation / 10f;
+        float increment = rotation / 40f;
         increment *= (direction) ? 1 : -1; 
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 40; i++)
         {
             float prevRotationX = transform.rotation.x;
             transform.Rotate(Vector3.right, prevRotationX + increment);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(1.0f/120f);
         }
         isMoving = false;
     }

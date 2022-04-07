@@ -29,8 +29,12 @@ public class Utilities
 
     public static void playSound(AudioSource audioSource, AudioClip clip)
     {
-        if(audioSource && !audioSource.isPlaying)
+        if(audioSource)
         {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
             audioSource.PlayOneShot(clip);
         }
     }

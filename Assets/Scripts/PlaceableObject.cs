@@ -26,13 +26,14 @@ public class PlaceableObject : PickupableInterface
             if(hint && hint.hasObjectIn() == false)
             {
                 OnDrop();
+                OnLeave();
                 Vector3 position = hint.GetPosition();
                 Vector3 rotation = hint.DesiredRotation();
                 transform.SetPositionAndRotation(position, Quaternion.Euler(rotation));
                 rb.constraints = RigidbodyConstraints.FreezeAll;
                 rb.freezeRotation = true;
                 hint.isObjectPlaced(true);
-                OnLeave();
+                SetCollisionNoises(false);
                 OnPlaceObj.Invoke();
                 placeDirection = null;
                 return true;
