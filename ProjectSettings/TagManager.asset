@@ -10,6 +10,7 @@ TagManager:
   - LightBulbHint
   - LightDetect
   - PaperHint
+  - KeyHint
   layers:
   - Default
   - TransparentFX
