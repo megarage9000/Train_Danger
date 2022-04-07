@@ -6791,8 +6791,29 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 6.4583335
-    functionName: 
+  - time: 1.9583334
+    functionName: playUnlockNoise
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.6666665
+    functionName: playlockHitNoise
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.9583335
+    functionName: playlockHitNoise
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 6.375
+    functionName: playVaultOpen
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
