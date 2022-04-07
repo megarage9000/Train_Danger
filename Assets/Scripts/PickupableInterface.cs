@@ -10,6 +10,7 @@ public class PickupableInterface : MonoBehaviour
 
     public UnityEvent OnDropObj;
     public UnityEvent OnPickupObj;
+    public UnityEvent OnCollisionEvent;
     public Vector3 freezeView = new Vector3(0f, 0f, 0f);
     public Vector3 freezePositionOffsets = new Vector3(0f, 0f, 0f);
 
@@ -92,5 +93,13 @@ public class PickupableInterface : MonoBehaviour
         rb.freezeRotation = false;
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(new Vector3(50, 0, 0));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(OnCollisionEvent != null)
+        {
+            OnCollisionEvent.Invoke();
+        }
     }
 }

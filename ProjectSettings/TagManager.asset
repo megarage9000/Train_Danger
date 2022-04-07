@@ -11,6 +11,7 @@ TagManager:
   - LightDetect
   - PaperHint
   - KeyHint
+  - WineHint
   layers:
   - Default
   - TransparentFX

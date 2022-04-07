@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: ebfd3a80ee6ac864c865b11b48ff2d6d
+guid: d97110883f633854eab7bd9d1e8b2ba5
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Blueberry
-    second: {fileID: 2100000, guid: 460b2504f55373b47b8e3613e5e91141, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Bottle2
-    second: {fileID: 2100000, guid: 460b2504f55373b47b8e3613e5e91141, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Cider
-    second: {fileID: 2100000, guid: 460b2504f55373b47b8e3613e5e91141, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Cork
-    second: {fileID: 2100000, guid: 0623c5eb677bdce44bb4ec546ca8e7e2, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -56,7 +36,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 100
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1
@@ -87,7 +67,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 0
+    tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1

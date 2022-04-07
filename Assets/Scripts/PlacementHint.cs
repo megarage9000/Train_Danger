@@ -12,6 +12,7 @@ public class PlacementHint : MonoBehaviour
     MeshRenderer render;
     Outline outline;
     bool hasObject;
+    public Transform desiredTransform;
 
     public UnityEvent onObjectPlacedEvent;
 
@@ -23,16 +24,21 @@ public class PlacementHint : MonoBehaviour
         render.enabled = false;
         outline.enabled = false;
         outline.OutlineColor = Color.black;
+
+        if(desiredTransform == null)
+        {
+            desiredTransform = transform;
+        }
     }
 
     public Vector3 GetPosition()
     {
-        return transform.position;
+        return desiredTransform.position;
     }
 
     public Vector3 DesiredRotation()
     {
-        return transform.rotation.eulerAngles;
+        return desiredTransform.rotation.eulerAngles;
     }
 
     public void isObjectPlaced(bool value)

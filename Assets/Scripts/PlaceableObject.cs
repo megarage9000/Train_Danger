@@ -15,6 +15,7 @@ public class PlaceableObject : PickupableInterface
     private void Start()
     {
         placeDirection = null;
+        OnDropObj.AddListener(Clear);
     }
 
     public bool OnPlace()
@@ -39,6 +40,15 @@ public class PlaceableObject : PickupableInterface
             return false;
         }
         return false;
+    }
+
+    public void Clear()
+    {
+        placeDirection = null;
+        if (placeableLocation)
+        {
+            HidePreviousHint();
+        }
     }
 
     public void OnRemove()
