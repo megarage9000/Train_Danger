@@ -15,7 +15,9 @@ public class Interaction : MonoBehaviour
     GameObject interactable;
 
     GameObject heldObject;
-    
+
+    public Transform camera;
+
     public Transform heldObjectPosition;
     public Rig HandRig;
 
@@ -60,7 +62,7 @@ public class Interaction : MonoBehaviour
             PlaceableObject placeableScript = heldObject.GetComponent<PlaceableObject>();
             if (placeableScript)
             {
-                placeableScript.placeDirection = transform;
+                placeableScript.placeDirection = camera;
             }
         }
         // Drop object
@@ -110,7 +112,7 @@ public class Interaction : MonoBehaviour
 
     void CheckPickupables()
     {
-        GameObject scannedPickupable = Utilities.GetObjectInRange(pickUpMask, interactionRange, transform);
+        GameObject scannedPickupable = Utilities.GetObjectInRange(pickUpMask, interactionRange, camera);
         if (scannedPickupable)
         {
             if(scannedPickupable != pickupable && pickupable != null)
@@ -129,7 +131,7 @@ public class Interaction : MonoBehaviour
 
     void CheckInteractables()
     {
-        GameObject scannedInteractable = Utilities.GetObjectInRange(interactionMask, interactionRange, transform);
+        GameObject scannedInteractable = Utilities.GetObjectInRange(interactionMask, interactionRange, camera);
         if (scannedInteractable)
         {
             if(scannedInteractable != interactable && interactable != null)

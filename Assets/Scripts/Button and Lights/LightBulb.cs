@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class LightBulb : MonoBehaviour
@@ -13,6 +14,9 @@ public class LightBulb : MonoBehaviour
 
     Renderer lightRenderer;
     Light light;
+
+    public UnityEvent OnEvent;
+    public UnityEvent OffEvent;
 
     private void Awake()
     {
@@ -43,6 +47,7 @@ public class LightBulb : MonoBehaviour
         {
             lightDetector.enabled = true;
         }
+        OnEvent.Invoke();
     }
 
     public void TurnOff()

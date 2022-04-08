@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Outline))]
 [RequireComponent(typeof(MeshRenderer))]
@@ -11,8 +12,9 @@ public class PlacementHint : MonoBehaviour
     MeshRenderer render;
     Outline outline;
     bool hasObject;
+    public Transform desiredTransform;
 
-    
+    public UnityEvent onObjectPlacedEvent;
 
     private void Awake()
     {
@@ -22,23 +24,32 @@ public class PlacementHint : MonoBehaviour
         render.enabled = false;
         outline.enabled = false;
         outline.OutlineColor = Color.black;
+
+        if(desiredTransform == null)
+        {
+            desiredTransform = transform;
+        }
     }
 
     public Vector3 GetPosition()
     {
-        return transform.position;
+        return desiredTransform.position;
     }
 
     public Vector3 DesiredRotation()
     {
-        return transform.rotation.eulerAngles;
+        return desiredTransform.rotation.eulerAngles;
     }
 
     public void isObjectPlaced(bool value)
     {
-        hasObject = true;
+        hasObject = value;
         render.enabled = !value;
         outline.enabled = !value;
+        if(onObjectPlacedEvent != null)
+        {
+            onObjectPlacedEvent.Invoke();
+        }
     }
 
     public bool hasObjectIn()

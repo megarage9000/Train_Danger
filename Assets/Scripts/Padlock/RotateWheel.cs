@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RotateWheel : InteractableInterface
 {
@@ -11,6 +12,7 @@ public class RotateWheel : InteractableInterface
     public int wheelId;
 
     public static event Action<int, int> Rotated = delegate { };
+    public UnityEvent RotateNoise;
 
     private const int MAX_NUM = 10;
     private const int MIN_NUM = 1;
@@ -31,6 +33,7 @@ public class RotateWheel : InteractableInterface
 
     private IEnumerator Rotate(bool isDownward)
     {
+        RotateNoise.Invoke();
         isRotating = true;
         float rotationInc = rotation / 10;
         rotationInc *= (!isDownward) ? -1 : 1;

@@ -15,6 +15,7 @@ public class PlaceableObject : PickupableInterface
     private void Start()
     {
         placeDirection = null;
+        OnDropObj.AddListener(Clear);
     }
 
     public bool OnPlace()
@@ -25,13 +26,14 @@ public class PlaceableObject : PickupableInterface
             if(hint && hint.hasObjectIn() == false)
             {
                 OnDrop();
+                OnLeave();
                 Vector3 position = hint.GetPosition();
                 Vector3 rotation = hint.DesiredRotation();
                 transform.SetPositionAndRotation(position, Quaternion.Euler(rotation));
                 rb.constraints = RigidbodyConstraints.FreezeAll;
                 rb.freezeRotation = true;
                 hint.isObjectPlaced(true);
-                OnLeave();
+                SetCollisionNoises(false);
                 OnPlaceObj.Invoke();
                 placeDirection = null;
                 return true;
@@ -39,6 +41,27 @@ public class PlaceableObject : PickupableInterface
             return false;
         }
         return false;
+    }
+
+    public void Clear()
+    {
+        placeDirection = null;
+        if (placeableLocation)
+        {
+            HidePreviousHint();
+        }
+    }
+
+    public void OnRemove()
+    {
+        if (placeableLocation)
+        {
+            PlacementHint hint = placeableLocation.GetComponent<PlacementHint>();
+            if(hint && hint.hasObjectIn())
+            {
+                hint.isObjectPlaced(false);
+            }
+        }
     }
 
     public void Update()

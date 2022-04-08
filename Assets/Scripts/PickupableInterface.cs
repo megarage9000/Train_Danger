@@ -10,6 +10,7 @@ public class PickupableInterface : MonoBehaviour
 
     public UnityEvent OnDropObj;
     public UnityEvent OnPickupObj;
+    public UnityEvent OnCollisionEvent;
     public Vector3 freezeView = new Vector3(0f, 0f, 0f);
     public Vector3 freezePositionOffsets = new Vector3(0f, 0f, 0f);
 
@@ -19,6 +20,7 @@ public class PickupableInterface : MonoBehaviour
 
     Outline outline;
     protected Rigidbody rb;
+    bool canMakeCollisionNoises = true;
     private void Awake()
     {
         outline = GetComponent<Outline>();
@@ -70,6 +72,7 @@ public class PickupableInterface : MonoBehaviour
             rb.freezeRotation = false;
         }
         OnDropObj.Invoke();
+        SetCollisionNoises(true);
     }
 
     void ApplyOffsets()
@@ -92,5 +95,18 @@ public class PickupableInterface : MonoBehaviour
         rb.freezeRotation = false;
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(new Vector3(50, 0, 0));
+    }
+
+    public void SetCollisionNoises(bool value)
+    {
+        canMakeCollisionNoises = value;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(OnCollisionEvent != null && transform.parent == null && canMakeCollisionNoises)
+        {
+            OnCollisionEvent.Invoke();
+        }
     }
 }

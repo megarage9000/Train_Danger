@@ -216,6 +216,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Button"",
+                    ""id"": ""a22455a6-ebaa-4aa5-9622-671d4c3e8078"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -249,6 +258,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Freeze Object"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3656b4d1-e066-4ce1-920f-dce94f233739"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -297,6 +317,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Interaction_Pickup = m_Interaction.FindAction("Pickup", throwIfNotFound: true);
         m_Interaction_Activate = m_Interaction.FindAction("Activate", throwIfNotFound: true);
         m_Interaction_FreezeObject = m_Interaction.FindAction("Freeze Object", throwIfNotFound: true);
+        m_Interaction_Zoom = m_Interaction.FindAction("Zoom", throwIfNotFound: true);
         // Misc
         m_Misc = asset.FindActionMap("Misc", throwIfNotFound: true);
         m_Misc_Pause = m_Misc.FindAction("Pause", throwIfNotFound: true);
@@ -427,6 +448,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Interaction_Pickup;
     private readonly InputAction m_Interaction_Activate;
     private readonly InputAction m_Interaction_FreezeObject;
+    private readonly InputAction m_Interaction_Zoom;
     public struct InteractionActions
     {
         private @PlayerControls m_Wrapper;
@@ -434,6 +456,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Pickup => m_Wrapper.m_Interaction_Pickup;
         public InputAction @Activate => m_Wrapper.m_Interaction_Activate;
         public InputAction @FreezeObject => m_Wrapper.m_Interaction_FreezeObject;
+        public InputAction @Zoom => m_Wrapper.m_Interaction_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -452,6 +475,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @FreezeObject.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnFreezeObject;
                 @FreezeObject.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnFreezeObject;
                 @FreezeObject.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnFreezeObject;
+                @Zoom.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnZoom;
             }
             m_Wrapper.m_InteractionActionsCallbackInterface = instance;
             if (instance != null)
@@ -465,6 +491,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @FreezeObject.started += instance.OnFreezeObject;
                 @FreezeObject.performed += instance.OnFreezeObject;
                 @FreezeObject.canceled += instance.OnFreezeObject;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
         }
     }
@@ -515,6 +544,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPickup(InputAction.CallbackContext context);
         void OnActivate(InputAction.CallbackContext context);
         void OnFreezeObject(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
     public interface IMiscActions
     {

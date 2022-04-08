@@ -5,12 +5,8 @@ using UnityEngine;
 public class LightDetect : MonoBehaviour
 {
     const string otherTag = "LightDetect";
-    public ColorPanelHint hint;
+    public PaperReveal hint;
 
-    private void Start()
-    {
-        hint.NoColour();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,16 +14,7 @@ public class LightDetect : MonoBehaviour
         if (detected.CompareTag(otherTag))
         {
             print("detected light bulb!");
-            hint.EnableColour();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        GameObject detected = other.transform.gameObject;
-        if (detected.CompareTag(otherTag))
-        {
-            hint.NoColour();
+            hint.RevealCode();
         }
     }
 }

@@ -10,6 +10,11 @@ TagManager:
   - LightBulbHint
   - LightDetect
   - PaperHint
+  - KeyHint
+  - WineHint
+  - Wine
+  - Receipt
+  - ReceiptHint
   layers:
   - Default
   - TransparentFX
