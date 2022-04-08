@@ -26,7 +26,6 @@ public class InputManager : MonoBehaviour
         interaction = controls.Interaction;
         misc = controls.Misc;
 
-
         // groundMovement.[action].performed += context => do something
         // Essentially reads a vector 2 input coming from the input system
         groundMovement.HorizontalMovement.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();

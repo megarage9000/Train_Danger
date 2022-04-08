@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     public int numScenes = 3;
     static int index = 0;
+
     private void OnTriggerEnter(Collider other)
     {
         string tag = other.gameObject.tag;
@@ -19,5 +20,22 @@ public class SceneLoader : MonoBehaviour
             }
             SceneManager.LoadScene(index);
         }
+    }
+
+    public void StartGame()
+    {
+        index = 1;
+        SceneManager.LoadScene(index);
+    }
+
+    public void RestartGame()
+    {
+        StartCoroutine(WaitToStart());
+    }
+
+    IEnumerator WaitToStart()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(0);
     }
 }
