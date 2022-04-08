@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Levels/StartingCar.unity
-    guid: 3d05f8174c7f2094ea5569f28abd7cdc
+    path: Assets/Scenes/Levels/PassengerCar.unity
+    guid: 0e5fe5841d28e4406ac50fd312a04dfa
   - enabled: 1
     path: Assets/Scenes/Levels/LoungeCar.unity
     guid: 2a3cc031ec539e04d9e153b8dc26e009
   - enabled: 1
-    path: Assets/Scenes/Imports.unity
-    guid: 1e7f02661309d3444b94e4a2ef15c8d4
+    path: Assets/Scenes/Levels/Bar Car.unity
+    guid: 245d779018a782d46bd26dea9f41f2a2
   m_configObjects: {}
