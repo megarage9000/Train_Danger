@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu/Menu.unity
+    guid: a7e3e15e4858c4b08815896532b760cf
+  - enabled: 1
     path: Assets/Scenes/Levels/PassengerCar.unity
     guid: 0e5fe5841d28e4406ac50fd312a04dfa
   - enabled: 1
