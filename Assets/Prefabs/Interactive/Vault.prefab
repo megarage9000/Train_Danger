@@ -2004,6 +2004,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 1776721030525401024, guid: 16b73384210327745bf422c8090ccc45, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682204018928098806, guid: 16b73384210327745bf422c8090ccc45, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -21,6 +21,7 @@ public class Utilities
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range))
         {
+            Debug.DrawLine(transform.position, hit.transform.position, Color.white);
             GameObject detectObject = hit.collider.transform.gameObject;
             return detectObject;
         }
