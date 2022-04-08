@@ -13,6 +13,8 @@ TagManager:
   - KeyHint
   - WineHint
   - Wine
+  - Receipt
+  - ReceiptHint
   layers:
   - Default
   - TransparentFX
