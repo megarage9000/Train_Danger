@@ -11,6 +11,7 @@ public class ButtonPanel : PuzzlerInterface
     public Color errorColor;
     public Color correctColor;
     public int[] code;
+    int codeLength;
 
     int enteredIndex;
     protected int numButtons;
@@ -18,6 +19,7 @@ public class ButtonPanel : PuzzlerInterface
 
     protected void Awake()
     {
+        codeLength = code.Length;
         numButtons = buttons.Length;
         for(int i = 0; i < numButtons; i++)
         {
@@ -44,7 +46,7 @@ public class ButtonPanel : PuzzlerInterface
         else
         {
             enteredIndex++;
-            if(enteredIndex >= numButtons)
+            if(enteredIndex >= codeLength)
             {
                 OnSuccess.Invoke();
             }
