@@ -321,7 +321,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpHeight: 1.5
-  scaleDown: 0.5
+  scaleDown: 0.75
   crouchSpeedMultiplier: 0.5
   head: {fileID: 4103727548417452379}
   OnPlayerMove:
