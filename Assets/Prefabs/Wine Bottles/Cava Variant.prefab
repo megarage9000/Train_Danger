@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Wine
       objectReference: {fileID: 0}
+    - target: {fileID: 3268996027650659877, guid: 83e2faca64fc44f4a87d14b88bedbf9e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 460b2504f55373b47b8e3613e5e91141, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e2faca64fc44f4a87d14b88bedbf9e, type: 3}
 --- !u!1 &6339984261325782319 stripped

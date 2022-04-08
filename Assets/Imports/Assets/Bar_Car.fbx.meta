@@ -3,66 +3,11 @@ guid: 1d7a812820fcac049815ab799d0a09db
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Couch
-    second: {fileID: 2100000, guid: 39ceb95ffb8a16f4b9deba32c26790e0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Counter
-    second: {fileID: 2100000, guid: 78aa5c1996b698d4696e38746109595c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Floor
-    second: {fileID: 2100000, guid: 49ba1c58c36b109448de8abee7816f47, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_LampShade
-    second: {fileID: 2100000, guid: bd2606adbcc237e4395782710d67f53d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Metal
-    second: {fileID: 2100000, guid: f4c6bb786193380418b80f9855a77146, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Shelf
-    second: {fileID: 2100000, guid: 62998d2e2c481544ba17cf4b367eb01c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Stool
-    second: {fileID: 2100000, guid: 44360b6ba96941145b81fc848b999e45, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Table
-    second: {fileID: 2100000, guid: be0e02a8fca40254195e0a6bf06ddfde, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Wall
-    second: {fileID: 2100000, guid: 94a2b75a94a5ec145a01cac672f6db14, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Window
-    second: {fileID: 2100000, guid: 04a411145c9023342b02161636fd8b2c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 8e37096fa347f8946af0d4dde3ab5e97, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
-    materialName: 2
-    materialSearch: 2
+    materialName: 0
+    materialSearch: 1
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
