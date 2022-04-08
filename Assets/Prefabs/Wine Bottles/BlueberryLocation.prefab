@@ -28,21 +28,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1935337454713941067}
-  - {fileID: 1785855593269335589}
+  - {fileID: 7470326528754316584}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4566361438719645633
+--- !u!1001 &4629055958445225164
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 6753539789464256453}
     m_Modifications:
-    - target: {fileID: -4579437818424329378, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2852568275623838180, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -65,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2852568275623838180, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2852568275623838180, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
       propertyPath: m_LocalRotation.y
@@ -89,27 +85,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3232893039306070878, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
       propertyPath: m_Name
-      value: Blueberry
+      value: Blueberry Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 4025504926238276235, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4025504926238276235, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: -8427509283027643961, guid: 40fae0db27ebdfe499eeb5b28875c833, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
---- !u!1 &1406093539557166239 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3232893039306070878, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
-  m_PrefabInstance: {fileID: 4566361438719645633}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1785855593269335589 stripped
+--- !u!4 &7470326528754316584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2852568275623838180, guid: 8f6826c096a9d054e8aba749902dc5f8, type: 3}
-  m_PrefabInstance: {fileID: 4566361438719645633}
+  m_PrefabInstance: {fileID: 4629055958445225164}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6753539790619512989
 PrefabInstance:
@@ -202,7 +185,7 @@ MeshRenderer:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 1785855593269335589}
+  m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
@@ -231,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cc3809900aa0f4a9ed2d6c47b29899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPlace: {fileID: 1406093539557166239}
+  objectToPlace: {fileID: 0}
   placeableLocation: {fileID: 1935337454713941064}
 --- !u!114 &6753539789032277157
 MonoBehaviour:

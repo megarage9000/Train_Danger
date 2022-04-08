@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Bar Car.unity
     guid: 245d779018a782d46bd26dea9f41f2a2
+  - enabled: 1
+    path: Assets/Scenes/Levels/EngineCar.unity
+    guid: 7c5615f128b8d664788a59d91b5932c4
   m_configObjects: {}

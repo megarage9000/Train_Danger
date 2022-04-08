@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 6643825385928734212}
   - component: {fileID: 1979531081969960748}
   - component: {fileID: 753866688295942173}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: metal ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,6 +465,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a5f3dea287c7de343a3aa0b269af31b8, type: 2}
   - {fileID: 2100000, guid: 67f938dc6dd2ff04aa0ab874436341df, type: 2}
   lightDetector: {fileID: 2108239047242792182}
+  OnEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OffEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8411209392733959781
 MonoBehaviour:
   m_ObjectHideFlags: 0
