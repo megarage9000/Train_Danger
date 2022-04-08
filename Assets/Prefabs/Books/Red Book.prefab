@@ -57,7 +57,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8609817496850452951, guid: 089ca65b18549f845bf5382ceba7ac41, type: 3}
       propertyPath: m_Name
-      value: Book (1)
+      value: Red Book
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8175223175209654844, guid: 089ca65b18549f845bf5382ceba7ac41, type: 3}
+    - {fileID: 5833103805248340701, guid: 089ca65b18549f845bf5382ceba7ac41, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 089ca65b18549f845bf5382ceba7ac41, type: 3}

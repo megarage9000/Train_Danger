@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7224598744444894737, guid: 7f74e18711390b749b64db150210fef5, type: 3}
       propertyPath: m_Name
-      value: Book (1)
+      value: Turqoise Book
       objectReference: {fileID: 0}
     - target: {fileID: 7224598744444894743, guid: 7f74e18711390b749b64db150210fef5, type: 3}
       propertyPath: m_RootOrder
