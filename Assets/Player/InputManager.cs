@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] Movement movement;
     [SerializeField] MouseLook mouseLook;
     [SerializeField] Interaction playerInteraction;
+    [SerializeField] Zoom playerZoom;
 
     PlayerControls controls;
     PlayerControls.GroundMovementActions groundMovement;
@@ -41,6 +42,7 @@ public class InputManager : MonoBehaviour
         interaction.Pickup.performed += _ => playerInteraction.OnPickup();
         interaction.Activate.performed += _ => playerInteraction.OnInteract();
         interaction.FreezeObject.performed += _ => playerInteraction.OnFreezeHeld();
+        interaction.Zoom.performed += _ => playerZoom.ToggleZoom();
 
         // Crouch
         groundMovement.Crouch.performed += _ => movement.OnCrouchPressed();
